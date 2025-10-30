@@ -1,0 +1,26 @@
+name: "Source workflow"
+
+on:
+  workflow_dispatch:
+    inputs:
+      src_dispatch:
+        description: 'Source of the dispatch event (manual, argocd-values, installer)'
+        type: string
+        required: false
+
+jobs:
+  installer-deployment-workflow:
+    runs-on: [ ubuntu-22.04 ]
+    # secrets: inherit
+    steps:
+      - name: Dispatch and get URL
+        id: dispatch
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: 'target.yaml'
+          ref: 'main'
+
+      - name: Output the URL
+        run: |
+          echo "The triggered workflow run URL is: ${{ steps.dispatch.outputs.run_url }}"
+

@@ -1,0 +1,21 @@
+name: "Target workflow"
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_input:
+        description: 'Target input'
+        type: string
+        required: false
+
+jobs:
+  installer-deployment-workflow:
+    runs-on: [ ubuntu-22.04 ]
+    # secrets: inherit
+    steps:
+      - name: Sleep and printout
+        run: |
+          echo "Target input: ${{ github.event.inputs.target_input }}"
+          sleep 10
+          echo "Done sleeping"
+
