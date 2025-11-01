@@ -7,15 +7,18 @@ on:
         description: 'Target input'
         type: string
         required: false
+      #distinct_id:
+      #  description: 'Distinct ID'
+      #  required: false
 
 jobs:
-  installer-deployment-workflow:
+  target-workflow:
     runs-on: [ ubuntu-22.04 ]
     # secrets: inherit
     steps:
       - name: Sleep and printout
         run: |
           echo "Target input: ${{ github.event.inputs.target_input }}"
-          sleep 10
+          sleep 30
           echo "Done sleeping"
 

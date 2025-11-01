@@ -9,18 +9,37 @@ on:
         required: false
 
 jobs:
-  installer-deployment-workflow:
+  source-workflow:
     runs-on: [ ubuntu-22.04 ]
     # secrets: inherit
     steps:
-      - name: Dispatch and get URL
-        id: dispatch
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: 'target.yaml'
-          ref: 'main'
+      #- name: Dispatch and get URL
+      #  id: dispatch
+      #  uses: benc-uk/workflow-dispatch@v1
+      #  with:
+      #    workflow: 'target.yaml'
+      #    ref: 'main'
+      #    inputs: '{ "target_input": "12345" }'
 
-      - name: Output the URL
-        run: |
-          echo "The triggered workflow run URL is: ${{ steps.dispatch.outputs.run_url }}"
+
+      - name: 'Dispatch Workflow with Discovery'
+        uses: lasith-kg/dispatch-workflow@v1
+        id: dispatch-with-discovery
+        with:
+          dispatch-method: workflow_dispatch
+          owner: baohuynh09-lxp
+          repo: quickstart
+          ref: main
+          workflow: target.yml # Or Workflow ID
+          token: ${{ secrets.TOKEN }} # GitHub Token With Relevant Permissions
+          workflow-inputs: |
+            {
+              "target_input": "baohuynh",
+            }
+
+        - id: echo-run-id-url
+          name: "Echo Run ID and Run URL"
+          run: |
+            echo "${{ steps.dispatch-with-discovery.outputs.run-id }}"
+            echo "${{ steps.dispatch-with-discovery.outputs.run-url }}"
 
