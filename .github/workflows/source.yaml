@@ -31,11 +31,12 @@ jobs:
           ref: main
           workflow: target.yml # Or Workflow ID
           token: ${{ secrets.TOKEN }} # GitHub Token With Relevant Permissions
+          discover: true
           workflow-inputs: |
             {
-              "target_input": "baohuynh",
+              "target_input": "baohuynh"
             }
-          discover: true
+
 
       - id: echo-run-id-url
         name: "Echo Run ID and Run URL"
