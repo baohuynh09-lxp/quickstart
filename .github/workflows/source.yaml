@@ -35,6 +35,7 @@ jobs:
             {
               "target_input": "baohuynh",
             }
+          discover: true
 
       - id: echo-run-id-url
         name: "Echo Run ID and Run URL"
