@@ -1,5 +1,5 @@
 name: "Target workflow"
-run-name: ${{ inputs.distinct_id && inputs.distinct_id || 'N/A' }}
+run-name: workflow - ${{ inputs.distinct_id && inputs.distinct_id || 'N/A' }}
 
 on:
   workflow_dispatch:
