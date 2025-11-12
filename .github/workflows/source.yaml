@@ -37,10 +37,27 @@ jobs:
               "target_input": "baohuynh"
             }
 
-
       - id: echo-run-id-url
         name: "Echo Run ID and Run URL"
         run: |
           echo "${{ steps.dispatch-with-discovery.outputs.run-id }}"
           echo "${{ steps.dispatch-with-discovery.outputs.run-url }}"
+          echo "Writing to file"
+          echo "${{ steps.dispatch-with-discovery.outputs.run-url }}" > audit.txt
+
+      - uses: bacongobbler/azure-blob-storage-upload@main
+        with:
+          source_dir: .
+          account_name: deploycentralsitewf
+          container_name: dev-az
+          connection_string: ${{ secrets.deploycentralsitestkey }}
+          extra_args: '--pattern *.txt'
+          # WARNING: this will overwrite existing blobs in your blob storage
+          overwrite: 'true'
+
+
+
+
+
+
 
