@@ -50,7 +50,7 @@ jobs:
           source_dir: .
           account_name: deploycentralsitewf
           container_name: dev-az
-          connection_string: ${{ secrets.deploycentralsitestkey }}
+          connection_string: ${{ secrets.DEPLOYCENTRALSITESTKEY }}
           extra_args: '--pattern *.txt'
           # WARNING: this will overwrite existing blobs in your blob storage
           overwrite: 'true'
